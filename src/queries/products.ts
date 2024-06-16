@@ -8,7 +8,7 @@ export function useAvailableProducts() {
   return useQuery<AvailableProduct[], AxiosError>(
     "available-products",
     async () => {
-      const res = await axios.get<AvailableProduct[]>(
+      const res = await axios.get(
         `${API_PATHS.product}/products`
       );
       return res.data.products;
@@ -28,10 +28,10 @@ export function useAvailableProduct(id?: string) {
   return useQuery<AvailableProduct, AxiosError>(
     ["product", { id }],
     async () => {
-      const res = await axios.get<AvailableProduct>(
+      const res = await axios.get(
         `${API_PATHS.product}/products/${id}`
       );
-      return res.data;
+      return res.data.product;
     },
     { enabled: !!id }
   );
